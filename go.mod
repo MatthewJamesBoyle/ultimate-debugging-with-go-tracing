@@ -1,4 +1,4 @@
-module ultimate-debugging-with-go-tracing
+module github.com/MatthewJamesBoyle/ultimate-debugging-with-go-tracing
 
 go 1.21
 

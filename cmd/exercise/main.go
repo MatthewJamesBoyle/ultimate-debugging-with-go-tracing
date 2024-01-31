@@ -26,21 +26,22 @@ func main() {
 		trace.WithBatcher(exporter),
 		trace.WithResource(resource.NewWithAttributes(
 			semconv.SchemaURL,
-			semconv.ServiceNameKey.String("app-two"),
+			semconv.ServiceNameKey.String("exercise"),
 		)),
 	)
 
 	otel.SetTracerProvider(tp)
-	tracer = tp.Tracer("app-two")
+	tracer = tp.Tracer("exercise")
 
 	// Define HTTP server and routes
-	http.Handle("/", otelhttp.NewHandler(http.HandlerFunc(CalcHandler), "Calc"))
+	http.Handle("/", otelhttp.NewHandler(http.HandlerFunc(CalcHandler), "calc"))
 	log.Fatal(http.ListenAndServe(":8082", nil))
 }
 
 func CalcHandler(w http.ResponseWriter, r *http.Request) {
-	calcOne(1000)
-	calcTwo(1000)
+	_ = calcOne(100000)
+
+	_ = calcTwo(100000)
 }
 
 func calcOne(n int) int {
